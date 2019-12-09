@@ -1,0 +1,67 @@
+version: '3.7'
+services:
+    #####################################################
+    #### DB
+    #####################################################
+    db:
+        image: postgres
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_DB: db
+            POSTGRES_USER: db_user
+            POSTGRES_PASSWORD: db_password
+        networks:
+            - 'sf_network'
+
+    adminer:
+        image: adminer:4.7.5
+        restart: on-failure
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db
+        networks:
+            - 'sf_network'
+
+    #####################################################
+    #### PHP
+    #####################################################
+    php:
+        build: ./docker/php-fpm
+        ports:
+            - "9000:9001"
+        volumes:
+            - './:/var/www/'
+            - './exercice4/:/var/www/symfony'
+        links:
+            - db
+        networks:
+            - 'sf_network'
+
+    nginx:
+        build: ./docker/nginx
+        ports:
+            - '80:80'
+        links:
+            - php
+        volumes:
+            - './exercice4/var/log/nginx:/var/log/nginx:cached'
+            - './:/var/www/symfony:ro'
+        networks:
+            - 'sf_network'
+
+    #####################################################
+    #### Utils
+    #####################################################
+    node:
+        image: 'node:10'
+        user: 'node'
+        volumes:
+            - './exercice4:/var/www/html'
+        working_dir: '/var/www/html'
+        networks:
+            - 'sf_network'
+
+networks:
+    sf_network:
