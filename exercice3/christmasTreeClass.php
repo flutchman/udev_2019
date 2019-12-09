@@ -22,6 +22,9 @@ Class ChristmasTree
      */
     public function __construct($size = 10, $leafDesign = "*", $trunkDesign = "*")
     {
+        $this->leafDesign = $leafDesign;
+        $this->trunkDesign = $trunkDesign;
+        $this->size = $size;
     }
 
     /**
@@ -30,6 +33,8 @@ Class ChristmasTree
      */
     public function drawTree(): void
     {
+        $this->drawLeaf();
+        $this->drawTrunk();
     }
 
     /**
@@ -37,6 +42,14 @@ Class ChristmasTree
      */
     private function drawLeaf(): void
     {
+        for ($i = 1; $i < $this->size; $i++) {
+            echo str_repeat(" ", $this->size - $i);
+            for ($j = 0; $j < $i; $j++) {
+                echo $this->leafDesign;
+            }
+            echo str_repeat($this->leafDesign, $i - 1);
+            echo "\n";
+        }
     }
 
     /**
@@ -44,6 +57,12 @@ Class ChristmasTree
      */
     private function drawTrunk(): void
     {
+        $trunk = $this->size / 3;
+        for ($i = 0; $i < 3; $i++) {
+            echo str_repeat(" ", ($this->size - $trunk));
+            echo str_repeat($this->trunkDesign, $this->size - $trunk);
+            echo "\n";
+        }
     }
 
     /**
@@ -99,9 +118,13 @@ Class ChristmasTree
 /* Set here its size;                */
 /*************************************/
 
+$line = readline("How much this tree has to be ? ");
+$tree = new ChristmasTree($line);
 
 /*************************************/
 /* Display here the Tree !           */
 /*************************************/
 
+echo "\n";
+$tree->drawTree();
 echo "\n";
