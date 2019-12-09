@@ -33,7 +33,6 @@ services:
             - "9000:9001"
         volumes:
             - './:/var/www/'
-            - './exercice4/:/var/www/symfony'
         links:
             - db
         networks:
