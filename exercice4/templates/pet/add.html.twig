@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'pet_add' %}
+
+{# This is the block dedicated to the main content #}
+{% block main %}
+    {# Display here your pet form #}
+    {# Hint : https://symfony.com/doc/4.4/form/form_customization.html #}
+{% endblock %}
+
+{# This is the block dedicated to the sidebar content #}
+{% block sidebar %}
+    {# Create here your pet file #}
+    <div class="section text-center">
+        <a href="{{ path('pet_list') }}" class="btn btn-primary">{{ "action.back_to_pet"|trans }}</a>
+    </div>
+
+    {# Calling default sidebar #}
+    {{ parent() }}
+{% endblock %}

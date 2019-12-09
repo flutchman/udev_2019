@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'pet_list' %}
+
+{# This is the block dedicated to the main content #}
+{% block main %}
+    {% if petList is defined and petList|length > 0 %}
+        {# Display here your pet list #}
+        {# Hint : https://datatables.net/ #}
+        {# Don't forget to add your webpack tags ;) #}
+    {% else %}
+        <div class="alert alert-danger">
+            <p>{{ "help.no_pet"|trans }}</p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{# This is the block dedicated to the sidebar content #}
+{% block sidebar %}
+    {# Create here your pet file #}
+    <div class="section text-center">
+        <a href="{{ path('add_pet') }}" class="btn btn-primary">{{ "action.add_pet"|trans }}</a>
+    </div>
+
+    {# Calling default sidebar #}
+    {{ parent() }}
+{% endblock %}
