@@ -46,7 +46,7 @@ services:
             - php
         volumes:
             - './exercice4/var/log/nginx:/var/log/nginx:cached'
-            - './:/var/www/symfony:ro'
+            - './:/var/www:ro'
         networks:
             - 'sf_network'
 
