@@ -1,5 +1,4 @@
 # PHP U'DEV - 2019
--------------------------------
 
 This repository contains different exercise created to present you basic PHP application
 If you need to test your code : `php exercice/file.php`
